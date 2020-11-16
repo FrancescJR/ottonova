@@ -1,0 +1,23 @@
+services:
+  #infra
+  repository.employee:
+    class: Cesc\Ottivio\Infrastructure\Persistence\EmployeeRepository
+
+  console.employee_list:
+    class: Cesc\Ottivio\Infrastructure\Console\GetEmployeeVacationListEndpoint
+    arguments:
+      - '@repository.get_employee_list'
+
+  #application
+  application.services.get_employee_vacation_days:
+    class: Cesc\Ottivio\Application\Employee\GetVacationDaysOnYearService
+    arguments:
+      - '@repository.employee'
+
+  application.services.get_employee_list:
+    class: Cesc\Ottivio\Application\Employee\GetEmployeeVacationDaysService
+    arguments:
+      - '@repository.employee'
+      - '@repository.get_employee_vacation_days'
+
+
