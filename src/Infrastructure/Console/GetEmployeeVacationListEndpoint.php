@@ -10,6 +10,7 @@ class GetEmployeeVacationListEndpoint
 {
     public const MESSAGE_MISSING_INPUT = "The proper execution is with one parameter";
     public const MESSAGE_NOT_NUMERIC = "Input must be a number";
+    public const MESSAGE_TOO_BIG = "Maximum year can be 9999";
 
     /**
      * @var GetEmployeeVacationDaysService
@@ -60,6 +61,10 @@ class GetEmployeeVacationListEndpoint
 
         if ( ! is_numeric($input)) {
             throw new Exception(self::MESSAGE_NOT_NUMERIC);
+        }
+
+        if ((int)$input > 9999) {
+            throw new Exception(self::MESSAGE_TOO_BIG);
         }
 
         return (int)$input;

@@ -32,6 +32,9 @@ class GetEmployeeVacationListEndpointTest extends TestCase
 
         $result = $endpoint->execute("string");
         self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_NOT_NUMERIC."\n", $result);
+
+        $result = $endpoint->execute("10000");
+        self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_TOO_BIG."\n", $result);
     }
 
 }
