@@ -11,6 +11,10 @@ class GetEmployeeVacationListEndpoint
     public const MESSAGE_MISSING_INPUT = "The proper execution is with one parameter";
     public const MESSAGE_NOT_NUMERIC = "Input must be a number";
     public const MESSAGE_NOT_INTEGER = "Input must be an integer";
+
+    /**
+     * @var GetEmployeeVacationDaysService
+     */
     private $getListService;
 
     public function __construct(GetEmployeeVacationDaysService $getListService)
