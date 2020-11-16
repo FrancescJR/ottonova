@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Cesc\Ottivio\Domain\Contract\Exception;
+namespace Cesc\Ottivio\Domain\Employee\Aggregates\Contract\Exception;
 
 use Exception;
 

@@ -1,13 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Cesc\Ottivio\Domain\Contract;
+namespace Cesc\Ottivio\Domain\Employee\Aggregates\Contract;
 
-use Cesc\Ottivio\Domain\Contract\ValueObject\ContractStartingDate;
-use Cesc\Ottivio\Domain\Contract\ValueObject\ContractMinimumVacationDays;
+use Cesc\Ottivio\Domain\Employee\Aggregates\Contract\ValueObject\ContractStartingDate;
+use Cesc\Ottivio\Domain\Employee\Aggregates\Contract\ValueObject\ContractMinimumVacationDays;
+use DateTime;
+use Exception;
 
 class Contract
 {
+    public const MINIMUM_VACATION_DAYS = 26;
 
     /**
      * @var ContractStartingDate
@@ -18,8 +21,6 @@ class Contract
      * @var ContractMinimumVacationDays
      */
     private $minimumVacationDays;
-
-    private $employee;
 
     /**
      * Contract constructor.
@@ -41,6 +42,11 @@ class Contract
     public function getStartingDate(): ContractStartingDate
     {
         return $this->startingDate;
+    }
+
+    public function getMinimumVacationDays(): ContractMinimumVacationDays
+    {
+        return $this->minimumVacationDays;
     }
 
 }

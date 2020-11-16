@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Cesc\Ottivio\Domain\Contract\ValueObject;
+namespace Cesc\Ottivio\Domain\Employee\Aggregates\Contract\ValueObject;
 
 class ContractMinimumVacationDays
 {
@@ -14,17 +14,17 @@ class ContractMinimumVacationDays
     /**
      * ContractSpecialClause constructor.
      *
-     * @param int $minimumVacationDays
+     * @param int|null $minimumVacationDays
      */
-    public function __construct(int $minimumVacationDays)
+    public function __construct(?int $minimumVacationDays = null)
     {
         $this->value = $minimumVacationDays;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function value(): int
+    public function value(): ?int
     {
         return $this->value;
     }

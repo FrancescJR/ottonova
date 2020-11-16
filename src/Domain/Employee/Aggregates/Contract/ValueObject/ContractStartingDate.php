@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Cesc\Ottivio\Domain\Contract\ValueObject;
+namespace Cesc\Ottivio\Domain\Employee\Aggregates\Contract\ValueObject;
 
-use Cesc\Ottivio\Domain\Contract\Exception\InvalidContractStartingDateException;
+use Cesc\Ottivio\Domain\Employee\Aggregates\Contract\Exception\InvalidContractStartingDateException;
 use DateTime;
 
 class ContractStartingDate
 {
+    public const VALID_STARTING_DAYS = [1, 15];
     /**
      * @var DateTime
      */
@@ -32,6 +33,11 @@ class ContractStartingDate
         return $this->value;
     }
 
+    public function year(): int
+    {
+        return (int)$this->value->format('Y');
+    }
+
     /**
      * @param DateTime $startingDate
      *
@@ -40,7 +46,7 @@ class ContractStartingDate
     private function setValue(DateTime $startingDate): void
     {
         // check if it is 1 or 15 of month
-        if ($startingDate == "a") {
+        if ( ! in_array($startingDate->format('d'), self::VALID_STARTING_DAYS)) {
             throw new InvalidContractStartingDateException("Starting Date of contract can be only on 1st or 15th");
         }
 
