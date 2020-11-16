@@ -1,0 +1,16 @@
+{
+    "name": "ottonova/cesc-challenge",
+    "description": "Cesc challenge",
+    "type": "interview-challenge",
+    "license": "open to all, copy me",
+    "autoload": {
+      "psr-4": {
+        "Cesc\\Ottivio\\": "src/"
+      }
+    },
+    "require": {
+        "symfony/config": "^5.1",
+        "symfony/dependency-injection": "^5.1",
+        "phpunit/phpunit": "^9.4"
+    }
+}
