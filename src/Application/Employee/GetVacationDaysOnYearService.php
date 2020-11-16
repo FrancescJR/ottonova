@@ -28,10 +28,10 @@ class GetVacationDaysOnYearService
      * @param int $year
      * @param string $employeeName
      *
-     * @return float
+     * @return int
      * @throws Exception
      */
-    public function execute(int $year, string $employeeName): float
+    public function execute(int $year, string $employeeName): int
     {
         $employee = $this->employeeRepository->getWithContract(new EmployeeName($employeeName));
 
@@ -48,7 +48,7 @@ class GetVacationDaysOnYearService
         // that even with an special clause, the holiday days will be proportional to the
         // time of the contract.
         if ($employee->getWorkAge($year) == 0) {
-            $vacationDays = $vacationDays / $this->getFullMonthsWorked($employee->getContract());
+            $vacationDays = (int)floor($vacationDays * $this->getFullMonthsWorked($employee->getContract()) / 12);
         }
 
 
@@ -66,8 +66,8 @@ class GetVacationDaysOnYearService
     {
         if ($employee->getAge($year) >= self::MINIMUM_AGE_FOR_EXTRA_DAYS) {
             // get just the whole days.
-            return $employee->getWorkAge($year) /
-                   self::YEARS_NEEDED_FOR_AN_EXTRA_DAY;
+            return (int)floor($employee->getWorkAge($year) /
+                              self::YEARS_NEEDED_FOR_AN_EXTRA_DAY);
         }
 
         return 0;
@@ -82,9 +82,12 @@ class GetVacationDaysOnYearService
     private function getFullMonthsWorked(Contract $contract): int
     {
         // check how many months will the employee have completed by the end of the year.
-        return $contract->getStartingDate()->value()->diff(
-            new DateTime('1-1-' . (string)($contract->getStartingDate()->year() + 1))
-        )->m;
+        $toDate = new DateTime(Employee::DAY_FOR_WORK_AGE_COUNTER .
+                               (string)($contract->getStartingDate()->year() + 1));
+
+        $period = $contract->getStartingDate()->value()->diff($toDate);
+
+        return $period->y == 1 ? 12 : $period->m;
     }
 
 }
