@@ -11,6 +11,7 @@
     "require": {
         "symfony/config": "^5.1",
         "symfony/dependency-injection": "^5.1",
-        "phpunit/phpunit": "^9.4"
+        "phpunit/phpunit": "^9.4",
+        "symfony/yaml": "^5.1"
     }
 }
