@@ -23,7 +23,7 @@ class EmployeeVacationPOTest extends TestCase
 
         $employeeVacationPO = new EmployeeVacationPO($employee, self::VACATION_DAYS);
 
-        self::assertEquals(EmployeeNameTest::TEST_NAME . ": " . self::VACATION_DAYS,
+        self::assertEquals(EmployeeNameTest::TEST_NAME . ": " . self::VACATION_DAYS ."\n",
             $employeeVacationPO->consoleOutput());
 
     }

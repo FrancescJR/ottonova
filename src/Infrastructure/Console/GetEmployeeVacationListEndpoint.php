@@ -8,6 +8,9 @@ use Exception;
 
 class GetEmployeeVacationListEndpoint
 {
+    public const MESSAGE_MISSING_INPUT = "The proper execution is with one parameter";
+    public const MESSAGE_NOT_NUMERIC = "Input must be a number";
+    public const MESSAGE_NOT_INTEGER = "Input must be an integer";
     private $getListService;
 
     public function __construct(GetEmployeeVacationDaysService $getListService)
@@ -15,12 +18,13 @@ class GetEmployeeVacationListEndpoint
         $this->getListService = $getListService;
     }
 
+
     /**
-     * @param int|null $userInput
+     * @param null $userInput
      *
      * @return string
      */
-    public function execute(?int $userInput = null)
+    public function execute($userInput = null): string
     {
         try {
             $this->validateInput($userInput);
@@ -40,22 +44,22 @@ class GetEmployeeVacationListEndpoint
     }
 
     /**
-     * @param int|null $input
+     * @param $input
      *
      * @throws Exception
      */
-    private function validateInput(?int $input = null):void
+    private function validateInput($input = null): void
     {
-        if (!$input) {
-            throw new Exception("The proper execution is with one parameter");
+        if ( ! $input) {
+            throw new Exception(self::MESSAGE_MISSING_INPUT);
         }
 
-        if (!is_numeric($input)) {
-            throw new Exception("Input must be a number");
+        if ( ! is_numeric($input)) {
+            throw new Exception(self::MESSAGE_NOT_NUMERIC);
         }
 
-        if (!is_int($input)) {
-            throw new Exception("Input must be an integer");
+        if ( ! is_int($input)) {
+            throw new Exception(self::MESSAGE_NOT_INTEGER);
         }
     }
 

@@ -18,7 +18,7 @@ class EmployeeVacationPO
 
     public function consoleOutput(): string
     {
-        return $this->employeeName.": ".(string)$this->vacationDays;
+        return $this->employeeName.": ".(string)$this->vacationDays."\n";
     }
 
 }
