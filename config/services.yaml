@@ -6,7 +6,7 @@ services:
   console.employee_list:
     class: Cesc\Ottivio\Infrastructure\Console\GetEmployeeVacationListEndpoint
     arguments:
-      - '@repository.get_employee_list'
+      - '@application.services.get_employee_list'
 
   #application
   application.services.get_employee_vacation_days:
@@ -18,6 +18,6 @@ services:
     class: Cesc\Ottivio\Application\Employee\GetEmployeeVacationDaysService
     arguments:
       - '@repository.employee'
-      - '@repository.get_employee_vacation_days'
+      - '@application.services.get_employee_vacation_days'
 
 

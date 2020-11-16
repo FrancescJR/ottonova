@@ -43,7 +43,7 @@ class GetEmployeeVacationListEndpoint
 
             return $listFormatted;
         } catch (Exception $e) {
-            return $e->getMessage();
+            return $e->getMessage() . "\n";
         }
     }
 
