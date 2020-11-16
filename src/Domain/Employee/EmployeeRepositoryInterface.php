@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Cesc\Ottivio\Domain\Employee;
 
 
+use Cesc\Ottivio\Domain\Employee\Exception\EmployeeNotFoundException;
 use Cesc\Ottivio\Domain\Employee\ValueObject\EmployeeName;
 
 interface EmployeeRepositoryInterface
@@ -17,6 +18,7 @@ interface EmployeeRepositoryInterface
      * @param EmployeeName $employeeName
      *
      * @return Employee
+     * @throws EmployeeNotFoundException
      */
     public function getWithContract(EmployeeName $employeeName):Employee;
 
