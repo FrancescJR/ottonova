@@ -35,6 +35,10 @@ class GetVacationDaysOnYearService
     {
         $employee = $this->employeeRepository->getWithContract(new EmployeeName($employeeName));
 
+        if ($year < $employee->getContract()->getStartingDate()->year()) {
+            return 0;
+        }
+
         $vacationDays = Contract::MINIMUM_VACATION_DAYS;
 
         $vacationDays += $this->getSeniorityExtraDays($employee, $year);

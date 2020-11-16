@@ -18,7 +18,7 @@ class GetEmployeeVacationListEndpointTest extends TestCase
         $service->method('execute')->willReturn([$po]);
 
         $endpoint = new GetEmployeeVacationListEndpoint($service);
-        $result = $endpoint->execute(2020);
+        $result = $endpoint->execute("2020");
 
         self::assertEquals('string', $result);
     }
@@ -28,13 +28,10 @@ class GetEmployeeVacationListEndpointTest extends TestCase
         $service = self::createMock(GetEmployeeVacationDaysService::class);
         $endpoint = new GetEmployeeVacationListEndpoint($service);
         $result = $endpoint->execute();
-        self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_MISSING_INPUT, $result);
+        self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_MISSING_INPUT."\n", $result);
 
         $result = $endpoint->execute("string");
-        self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_NOT_NUMERIC, $result);
-
-        $result = $endpoint->execute(100.8);
-        self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_NOT_INTEGER, $result);
+        self::assertEquals(GetEmployeeVacationListEndpoint::MESSAGE_NOT_NUMERIC."\n", $result);
     }
 
 }

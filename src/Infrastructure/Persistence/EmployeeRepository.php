@@ -95,7 +95,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
         return new Employee(
             new EmployeeName($employeeData[0]),
-            new EmployeeBirthdate($employeeData[1]),
+            new EmployeeBirthdate(new DateTime($employeeData[1])),
             $contract
         );
     }

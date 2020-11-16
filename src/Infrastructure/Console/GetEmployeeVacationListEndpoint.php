@@ -10,7 +10,6 @@ class GetEmployeeVacationListEndpoint
 {
     public const MESSAGE_MISSING_INPUT = "The proper execution is with one parameter";
     public const MESSAGE_NOT_NUMERIC = "Input must be a number";
-    public const MESSAGE_NOT_INTEGER = "Input must be an integer";
 
     /**
      * @var GetEmployeeVacationDaysService
@@ -24,16 +23,16 @@ class GetEmployeeVacationListEndpoint
 
 
     /**
-     * @param null $userInput
+     * @param string|null $userInput
      *
      * @return string
      */
-    public function execute($userInput = null): string
+    public function execute(string $userInput = null): string
     {
         try {
-            $this->validateInput($userInput);
+            $userInput = $this->validateInput($userInput);
 
-            $list = $this->getListService->execute($userInput);
+            $list = $this->getListService->execute((int)$userInput);
 
             $listFormatted = "";
 
@@ -48,11 +47,12 @@ class GetEmployeeVacationListEndpoint
     }
 
     /**
-     * @param $input
+     * @param null $input
      *
+     * @return int
      * @throws Exception
      */
-    private function validateInput($input = null): void
+    private function validateInput($input = null): int
     {
         if ( ! $input) {
             throw new Exception(self::MESSAGE_MISSING_INPUT);
@@ -62,9 +62,7 @@ class GetEmployeeVacationListEndpoint
             throw new Exception(self::MESSAGE_NOT_NUMERIC);
         }
 
-        if ( ! is_int($input)) {
-            throw new Exception(self::MESSAGE_NOT_INTEGER);
-        }
+        return (int)$input;
     }
 
 }

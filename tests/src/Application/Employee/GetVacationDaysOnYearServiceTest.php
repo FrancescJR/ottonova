@@ -30,6 +30,20 @@ class GetVacationDaysOnYearServiceTest extends TestCase
         self::assertEquals(Contract::MINIMUM_VACATION_DAYS, $service->execute(2005, 'test'));
     }
 
+    public function testBefore(): void
+    {
+        $employeeRepository = $this->prepare(
+            new DateTime('30.12.1980'),
+            new DateTime('01.01.2001')
+        );
+
+        $service = new GetVacationDaysOnYearService(
+            $employeeRepository
+        );
+
+        self::assertEquals(0, $service->execute(1000, 'test'));
+    }
+
     public function testSeniority(): void
     {
         $employeeRepository = $this->prepare(
